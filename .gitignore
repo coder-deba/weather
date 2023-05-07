@@ -1,5 +1,4 @@
 .env
 __pycache__/
 flask_session/
-requirements.txt
 weather.db
