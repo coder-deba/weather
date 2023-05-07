@@ -136,7 +136,7 @@ def weather(city):
                         "precip": forecast[j]["chance_of_rain"]
                     }
                 hours.append(hour)
-        forecast = quote["forecast"]["forecastday"][1]["day"]
+        forecast = quote["forecast"]["forecastday"][0]["day"]
         max_temp = forecast["maxtemp_c"]
         min_temp = forecast["mintemp_c"]
         max_wind = forecast["maxwind_kph"]

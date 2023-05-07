@@ -23,8 +23,6 @@ def subscribed():
         send_email(subs[i]["username"], wet, subs[i]["email"], city)
 
 def send_email(username, wet, mail, place):
-    # me == my email address
-    # you == recipient's email address
     email_sender = 'info.weathernet02@gmail.com'
     email_password = 'vymvfrjphuejlkdo'
     email_receiver = mail
@@ -103,7 +101,7 @@ def send_email(username, wet, mail, place):
         
 
 # Schedule the message to be sent every day at 9 AM
-schedule.every().day.at("11:18").do(subscribed)
+schedule.every().day.at("09:00").do(subscribed)
 
 while True:
   schedule.run_pending()
