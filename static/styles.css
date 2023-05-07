@@ -110,6 +110,10 @@ footer, label{
     align-items: center;
 }
 
+.navbar-light .navbar-toggler-icon {
+    background-image: url(./navbar-removebg-preview.png);
+}
+
 @media screen and (max-width: 760px) {
     .weather{
         width: 90%;

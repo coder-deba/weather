@@ -104,10 +104,11 @@ def ask():
         place = request.form.get('place')
         if not place:
             return apology("ENTER VALID PLACE", 400)
-        wet = weather(place)[0]
-        if not wet:
+        wet = weather(place)
+        if wet == None:
             return apology('INVALID PLACE', 400)
-        return render_template('weather.html', wet=wet)
+        data = wet[0]
+        return render_template('weather.html', wet=data)
     return render_template('ask.html')
 
 
@@ -119,6 +120,7 @@ def register():
         place = request.form.get("city")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
+        wet = weather(place)
         if not username:
             return apology('INVALID USERNAME', 400)
         elif not password:
@@ -127,6 +129,8 @@ def register():
             return apology('ENTER PLACE', 400)
         elif not password == confirmation:
             return apology('INVALID PASSWORD', 400)
+        elif wet == None:
+            return apology('SORRY! PLEASE GIVE ANOTHER PLACE', 400)
         else:
             rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
             if len(rows) == 1:
@@ -160,6 +164,9 @@ def subscribe():
             return apology("ENTER VALID PLACE", 400)
         if not mail:
             return apology("ENTER YOUR MAIL ID", 400)
+        wet = weather(place)
+        if wet == None:
+            return apology('INVALID PLACE', 400)
         username = db.execute('SELECT username FROM users WHERE id = ?', session["user_id"])
         db.execute('INSERT INTO subscribers(username, place, email) VALUES (?,?,?)', username[0]["username"],place, mail)
         flash('You have successfully subscribed for daily mails!', 'success')
