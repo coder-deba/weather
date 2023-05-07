@@ -65,6 +65,7 @@ def weather(city):
     # Parse response
     try:
         main = quote["current"]
+        place = quote["location"]["name"]
         temp = main["temp_c"]
         humidity = main["humidity"]
         windspeed = main["wind_kph"]
@@ -73,7 +74,7 @@ def weather(city):
         pressure = main["pressure_mb"]
         preci = main["precip_mm"]
         weather = {
-            "name": city,
+            "name": place,
             "temp": temp,
             "humidity": humidity,
             "windspeed": windspeed,
