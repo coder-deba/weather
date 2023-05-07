@@ -1,10 +1,9 @@
 import os
 import requests
-import urllib.parse
 import datetime
 
 from dotenv.main import load_dotenv
-from flask import redirect, render_template, request, session
+from flask import redirect, render_template, session
 from functools import wraps
 
 load_dotenv()
@@ -100,7 +99,7 @@ def weather(city):
                 else:
                     k = 6
                 for j in range(i,i+k):
-                    timestamp = forecast[j]["time_epoch"] # Replace this with your Unix timestamp
+                    timestamp = forecast[j]["time_epoch"] 
 
                     # Convert Unix timestamp to a datetime object
                     dt_object = datetime.datetime.fromtimestamp(timestamp)
@@ -120,7 +119,7 @@ def weather(city):
         forecast = quote["forecast"]["forecastday"][1]["hour"]
         if k < 6:
             for j in range(6-k):
-                timestamp = forecast[j]["time_epoch"] # Replace this with your Unix timestamp
+                timestamp = forecast[j]["time_epoch"] 
 
                 # Convert Unix timestamp to a datetime object
                 dt_object = datetime.datetime.fromtimestamp(timestamp)

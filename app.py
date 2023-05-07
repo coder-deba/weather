@@ -3,15 +3,11 @@ import os
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
-from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
-import sched
-import time
 from datetime import datetime, time as dt_time, timedelta
 
 
-from helpers import apology, login_required, lookup, usd, weather
-# from mail import send_email
+from helpers import apology, login_required, usd, weather
 
 # Configure application
 app = Flask(__name__)
@@ -40,29 +36,15 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-
 @app.route("/")
 @login_required
 def index():
-    """Show portfolio of stocks"""
-    place = db.execute('SELECT place FROM users WHERE id = ?', session.get('user_id'))
-    city = place[0]["place"]
-    wet = weather(city)[0]
-    print(wet)
-    if wet == None:
-        return apology("PLEASE CHECK YOU INTERNET COONECTION", 404)
-    return render_template("index.html", wet=wet)
-
-@app.route("/home")
-@login_required
-def home():
     """Show weather in icon form"""
     place = db.execute('SELECT place FROM users WHERE id = ?', session.get('user_id'))
     city = place[0]["place"]
     wet = weather(city)
     data = wet[0]
     forecast = wet[1]
-    # print(forecast)
     if wet == None:
         return apology("PLEASE CHECK YOU INTERNET COONECTION", 404)
     return render_template("home.html", wet=data, forecast=forecast)
@@ -122,7 +104,7 @@ def ask():
         place = request.form.get('place')
         if not place:
             return apology("ENTER VALID PLACE", 400)
-        wet = lookup(place)
+        wet = weather(place)[0]
         if not wet:
             return apology('INVALID PLACE', 400)
         return render_template('weather.html', wet=wet)
@@ -137,7 +119,6 @@ def register():
         place = request.form.get("city")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
-        hist = username+"_hist"
         if not username:
             return apology('INVALID USERNAME', 400)
         elif not password:
@@ -153,9 +134,6 @@ def register():
             else:
                 hash = generate_password_hash(password)
                 db.execute('INSERT INTO users(username, hash, place) VALUES (?, ?, ?)', username, hash, place)
-                # db.execute('CREATE TABLE ? (user_id INTEGER, share_symbol TEXT, share_name TEXT, shares INTEGER, price REAL,total REAL, FOREIGN KEY(user_id) REFERENCES users(id))', username)
-                # db.execute(
-                #     'CREATE TABLE ? (user_id INTEGER, share_symbol TEXT, shares INTEGER, price REAL, date_created DateTime, FOREIGN KEY(user_id) REFERENCES users(id))', hist)
                 return redirect("/")
     return render_template('register.html')
 
@@ -165,7 +143,6 @@ def register():
 def feedback():
     """Stores the feedback of the users"""
     if request.method == "POST":
-        print(request.method)
         feedback = request.form.get("feedback")
         db.execute('INSERT INTO feedback(feedback) VALUES (?)', feedback)
     rows = db.execute('SELECT * FROM feedback')
@@ -185,16 +162,8 @@ def subscribe():
             return apology("ENTER YOUR MAIL ID", 400)
         username = db.execute('SELECT username FROM users WHERE id = ?', session["user_id"])
         db.execute('INSERT INTO subscribers(username, place, email) VALUES (?,?,?)', username[0]["username"],place, mail)
+        flash('You have successfully subscribed for daily mails!', 'success')
     return render_template("subscribe.html")
-
-# def subscribed():
-#     subs = db.execute('SELECT * FROM subscribers')
-#     print("it's good")
-#     for i in range(len(subs)):
-#         city = subs[i]["place"]
-#         wet = lookup(city)
-#         print(wet)
-#         send_email(subs[i]["username"], wet, subs[i]["email"])
     
 
 

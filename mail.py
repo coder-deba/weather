@@ -6,7 +6,7 @@ import ssl
 import schedule
 import time
 
-from helpers import  lookup, usd, weather
+from helpers import weather
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
