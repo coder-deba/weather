@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Weather
+{% endblock %}
+
+{% block main %}
+    <main class="container py-5 text-center">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th class="text-start">City name</th>
+                            <td class="text-start">{{wet.name}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-start">Description</th>
+                            <td class="text-start">{{wet.desc}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-start">Temperature</th>
+                            <td class="text-start">{{wet.temp}}K</td>
+                        </tr>
+                        <tr>
+                            <th class="text-start">Wind speed</th>
+                            <td class="text-start">{{wet.windspeed}}m/s</td>
+                        </tr>
+                        <tr>
+                            <th class="text-start">Humidity</th>
+                            <td class="text-start">{{wet.humidity}}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+{% endblock %}

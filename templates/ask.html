@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Ask
+{% endblock %}
+
+{% block main %}
+    <main class="container py-5 text-center"> 
+        <form action="/ask" method="post">
+            <div class="mb-3">
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="place" name="place" placeholder="Place" type="text">
+            </div>
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </main> 
+{% endblock %}

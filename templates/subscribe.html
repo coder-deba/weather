@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Subscribe
+{% endblock %}
+
+{% block main %}
+    <main class="container py-5 text-center">
+        <form action="/subscribe" method="post" class="subscribe">
+            <div class="mb-3">
+                <label for="place" class="form-label">Place</label>
+                <input autocomplete="off" autofocus class="form-control w-auto" id="place" name="place" type="text">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="mail">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Get weather messages everyday</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+    </main>
+{% endblock %}

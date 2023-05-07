@@ -1,0 +1,127 @@
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+/* Colors for brand */
+nav .navbar-brand .blue
+{
+    color: #537fbe;
+}
+nav .navbar-brand .red
+{
+    color: #ea433b;
+}
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+nav .navbar-brand .green
+{
+    color: #2e944b;
+}
+body{
+    background-color: #1b1b32;
+}
+
+.bg-image {
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+}
+.thead {
+    color: #2AF7AA;
+    background-color: rgb(0, 0, 0, 0.5);
+    font-size: 1.5rem;
+}
+
+.text1 {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    color: #4277F5;
+    text-decoration: none;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+
+.subscribe {
+    text-align: left;
+    width: 50%;
+    margin: auto;
+}
+
+footer, label{
+    color: #ffa700;
+}
+
+.weather {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    background-color: rgba(0, 0, 0, 0.487);
+    margin: 20px auto;
+    color: white;
+    font-size: large;
+    font-weight: 400;
+}
+
+.weather_data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.desc {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.current {
+    width: 100px;
+}
+
+.weather_data .other {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.temp {
+    font-size: xxx-large;
+}
+
+.hours {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.hour {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 760px) {
+    .weather{
+        width: 90%;
+    }
+    .hours{
+        padding: 0;
+        width: 100%;
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .temp {
+        font-size: xx-large;
+    }
+}

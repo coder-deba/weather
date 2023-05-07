@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+<div class="weather">
+    <div class="weather_data">
+        <div class="desc">
+            <img src="{{wet.icon}}" alt="wether_icon" class="current">
+            <p>{{wet.desc}}</p>
+        </div>
+        <div class="other">
+            <p>Pressure: {{wet.pressure}} mb</p>
+            <p>Windspeed: {{wet.windspeed}} kmph</p>
+            <p>Precip: {{wet.preci}} mm</p>
+            <p class="temp">{{wet.temp}} &#176;C</p>
+        </div>
+    </div>
+    <div class="hours">
+        {% for i in range(6) %}
+            <div class="hour">
+                <p>{{forecast[i]['time']}}</p>
+                <img src="{{forecast[i]['icon']}}" alt="">
+                <p>{{forecast[i]['text']}}</p>
+                <p>{{forecast[i]['temp']}} &#176;C</p>
+                <p>{{forecast[i]['precip']}} %</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

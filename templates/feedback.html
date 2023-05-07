@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Feedback
+{% endblock %}
+
+{% block main %}
+<main class="container py-5 text-center">
+    <form action="/feedback" method="post">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Your feedback</span>
+            <textarea class="form-control" aria-label="With textarea" name="feedback"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">submit</button>
+    </form>
+    <div class="container">
+        <table class="table thead my-3">
+            <thead class="thead">
+                <tr>
+                    <th>Sl no.</th>
+                    <th>Feedback</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in rows %}
+                    <tr>
+                        <td>{{feedback.id}}</td>
+                        <td>{{feedback.feedback}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}
